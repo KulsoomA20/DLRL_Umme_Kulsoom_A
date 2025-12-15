@@ -1,57 +1,60 @@
-# Improved LSTM Architecture for Time Series Forecasting
+# Time Series Forecasting Using an Improved LSTM Model
 
 ## Overview
-This project presents an enhanced Long Short-Term Memory (LSTM) model for time-series forecasting. The original implementation has been extended by improving the neural network architecture and replacing the dataset to demonstrate model adaptability, robustness, and better learning capacity on real-world data.
+This code implements an improved Long Short-Term Memory (LSTM) neural network for univariate time-series forecasting. The original model has been enhanced by modifying the dataset and upgrading the network architecture to better capture temporal dependencies and improve learning stability.
 
 ---
 
 ## Original Code Summary
-The original code:
+The original implementation:
 - Used the International Airline Passengers dataset
-- Implemented a single-layer LSTM model
-- Used a small time window
-- Did not apply regularization techniques
-- Trained for a fixed number of epochs without adaptive stopping
+- Implemented a single-layer LSTM network
+- Used a small fixed time window
+- Did not include regularization techniques
+- Trained the model for a fixed number of epochs without adaptive control
 
 ---
 
 ## Modifications Made
 
-### 1. Dataset Replacement and Cleaning
-- The airline passenger dataset was replaced with the **Daily Minimum Temperatures** dataset.
-- This dataset represents real-world climate data suitable for univariate time-series forecasting.
-- The dataset contained non-numeric and corrupted entries (e.g., `?0.2`).
-- These values were handled by converting invalid entries to `NaN` and removing affected rows to ensure clean numerical input for the model.
-- The core learning problem remains unchanged, ensuring conceptual continuity.
+### 1. Dataset Replacement
+- The original airline passenger dataset was replaced with the **Daily Minimum Temperatures** dataset.
+- This dataset represents real-world climate data collected over several years.
+- The learning objective remains the same: predicting future values from past observations.
 
-### 2. Increased Time Window
-- The time step (window size) was increased from **10 to 20**.
-- This allows the model to capture longer temporal dependencies and seasonal patterns.
+### 2. Data Cleaning and Preprocessing
+- Non-numeric values present in the dataset were handled appropriately.
+- The temperature values were converted to floating-point format for model compatibility.
+- Min-Max normalization was applied to improve training stability.
 
-### 3. Stacked LSTM Architecture
-- The model now consists of **two LSTM layers**.
-- The first LSTM layer uses `return_sequences=True` to enable stacking.
-- This improves the model’s ability to learn deeper temporal representations.
+### 3. Increased Time Window
+- The time-step (look-back window) was increased from 10 to 20.
+- This allows the model to learn longer-term temporal patterns.
 
-### 4. Dropout Regularization
+### 4. Stacked LSTM Architecture
+- The model was upgraded to a **two-layer stacked LSTM architecture**.
+- The first LSTM layer returns sequences to support deeper temporal learning.
+- This enhances the model’s capacity to capture complex trends in time-series data.
+
+### 5. Dropout Regularization
 - Dropout layers were added after each LSTM layer.
-- This helps prevent overfitting and improves generalization on unseen data.
-
-### 5. Early Stopping Mechanism
-- Early stopping was introduced during training.
-- Training halts automatically when the loss stops improving, preventing unnecessary epochs and overfitting.
+- This reduces overfitting and improves generalization on unseen data.
 
 ### 6. Improved Training Strategy
-- Batch size was increased to ensure more stable gradient updates.
-- The number of training epochs was set to **50**, with early stopping ensuring efficient and controlled training.
+- The number of training epochs was adjusted to 50 for efficient learning.
+- Batch size was increased to stabilize gradient updates.
+- Early stopping was introduced to prevent unnecessary training once convergence is achieved.
 
 ---
 
-## Evaluation Metric
-- **Root Mean Squared Error (RMSE)** is used to evaluate model performance on both training and testing datasets.
+## Advantages of the Modified Model
+- Better ability to learn long-term temporal dependencies
+- Reduced overfitting due to dropout and early stopping
+- Improved adaptability to different real-world time-series datasets
+- More stable and efficient training process
+- Cleaner and more modular model architecture
 
 ---
 
 ## Conclusion
-The improved LSTM architecture demonstrates enhanced learning capacity, better generalization, and robustness when applied to real-world time-series data. By incorporating data cleaning, architectural depth, regularization, and adaptive training strategies, the model aligns well with modern deep learning practices while preserving the original forecasting objective.
-
+The improved LSTM model demonstrates a more robust and flexible approach to time-series forecasting. By enhancing the dataset, architecture, and training strategy, the modified implementation aligns with modern deep learning practices while preserving the core forecasting objective of the original code.
